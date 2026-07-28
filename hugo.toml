@@ -1,10 +1,10 @@
-baseURL = "https://mendbayare.github.io/epa-lab"
+baseURL = "https://epa-lab.netlify.app"
 title = "EPA@Lab"
 theme = "ananke"
 defaultContentLanguage = "mn"
 defaultContentLanguageInSubdir = false
 
-copyright = "© EPA@Lab"
+copyright = "EPA@Lab"
 paginate = 9
 
 [languages]
