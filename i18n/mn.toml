@@ -16,7 +16,10 @@ other = "Мэдээ"
 [contact]
 other = "Холбоо барих"
 
-[read_more]
+[readMore]
+other = "Дэлгэрэнгүй"
+
+[more]
 other = "Дэлгэрэнгүй"
 
 [recent_posts]
@@ -33,3 +36,12 @@ other = "Өмнөх"
 
 [next]
 other = "Дараах"
+
+[translations]
+other = "Хэл"
+
+[pageTitle]
+other = "Блог"
+
+[taxonomyPageList]
+other = "Бүх мэдээ"

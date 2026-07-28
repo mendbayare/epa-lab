@@ -16,7 +16,10 @@ other = "News"
 [contact]
 other = "Contact"
 
-[read_more]
+[readMore]
+other = "Read more"
+
+[more]
 other = "Read more"
 
 [recent_posts]
@@ -33,3 +36,12 @@ other = "Previous"
 
 [next]
 other = "Next"
+
+[translations]
+other = "Languages"
+
+[pageTitle]
+other = "Blog"
+
+[taxonomyPageList]
+other = "All posts"
