@@ -1,0 +1,35 @@
+[home]
+other = "Нүүр"
+
+[about]
+other = "Бидний тухай"
+
+[members]
+other = "Гишүүд"
+
+[research]
+other = "Судалгаа"
+
+[news]
+other = "Мэдээ"
+
+[contact]
+other = "Холбоо барих"
+
+[read_more]
+other = "Дэлгэрэнгүй"
+
+[recent_posts]
+other = "Сүүлийн мэдээ"
+
+[all_posts]
+other = "Бүх мэдээ"
+
+[page]
+other = "Хуудас"
+
+[prev]
+other = "Өмнөх"
+
+[next]
+other = "Дараах"

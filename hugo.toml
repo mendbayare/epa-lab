@@ -1,0 +1,74 @@
+baseURL = "https://mendbayare.github.io/epa-lab"
+title = "EPA@Lab"
+theme = "ananke"
+defaultContentLanguage = "mn"
+defaultContentLanguageInSubdir = false
+
+copyright = "© EPA@Lab"
+paginate = 9
+
+[languages]
+  [languages.mn]
+    weight = 1
+    locale = "mn"
+    label = "Монгол"
+    title = "ЭЦА Лаб"
+    [languages.mn.menu]
+      [[languages.mn.menu.main]]
+        name = "Нүүр"
+        url = "/"
+        weight = 1
+      [[languages.mn.menu.main]]
+        name = "Бидний тухай"
+        url = "/about/"
+        weight = 2
+      [[languages.mn.menu.main]]
+        name = "Гишүүд"
+        url = "/members/"
+        weight = 3
+      [[languages.mn.menu.main]]
+        name = "Судалгаа"
+        url = "/research/"
+        weight = 4
+      [[languages.mn.menu.main]]
+        name = "Мэдээ"
+        url = "/news/"
+        weight = 5
+      [[languages.mn.menu.main]]
+        name = "Холбоо барих"
+        url = "/contact/"
+        weight = 6
+
+  [languages.en]
+    weight = 2
+    locale = "en"
+    label = "English"
+    title = "EPA@Lab"
+    [languages.en.menu]
+      [[languages.en.menu.main]]
+        name = "Home"
+        url = "/en/"
+        weight = 1
+      [[languages.en.menu.main]]
+        name = "About"
+        url = "/en/about/"
+        weight = 2
+      [[languages.en.menu.main]]
+        name = "Members"
+        url = "/en/members/"
+        weight = 3
+      [[languages.en.menu.main]]
+        name = "Research"
+        url = "/en/research/"
+        weight = 4
+      [[languages.en.menu.main]]
+        name = "News"
+        url = "/en/news/"
+        weight = 5
+      [[languages.en.menu.main]]
+        name = "Contact"
+        url = "/en/contact/"
+        weight = 6
+
+[params]
+  ananke_logo = "EPA@Lab"

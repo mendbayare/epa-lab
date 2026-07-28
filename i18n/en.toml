@@ -1,0 +1,35 @@
+[home]
+other = "Home"
+
+[about]
+other = "About"
+
+[members]
+other = "Members"
+
+[research]
+other = "Research"
+
+[news]
+other = "News"
+
+[contact]
+other = "Contact"
+
+[read_more]
+other = "Read more"
+
+[recent_posts]
+other = "Recent posts"
+
+[all_posts]
+other = "All posts"
+
+[page]
+other = "Page"
+
+[prev]
+other = "Previous"
+
+[next]
+other = "Next"
