@@ -49,3 +49,36 @@ collections:
       - { label: "Нэр / Name", name: "title", widget: "string" }
       - { label: "Төрөл / Category", name: "params_category", widget: "select", options: ["ABB relay", "SEL relay", "Testing", "Other"] }
       - { label: "Тайлбар / Description", name: "body", widget: "text", required: false }
+
+  - name: posts_en
+    label: "News (English)"
+    folder: content/en/news
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
+
+  - name: members_en
+    label: "Members (English)"
+    folder: content/en/members
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Name", name: "title", widget: "string" }
+      - { label: "Title/Position", name: "params_title", widget: "string" }
+      - { label: "Photo", name: "params_photo", widget: "image" }
+      - { label: "Year", name: "params_year", widget: "number", value_type: "int" }
+      - { label: "Achievements", name: "params_achievements", widget: "list", required: false }
+      - { label: "Body", name: "body", widget: "markdown", required: false }
+
+  - name: research_en
+    label: "Research (English)"
+    folder: content/en/research
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "markdown" }
