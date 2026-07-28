@@ -9,6 +9,7 @@ paginate = 9
 
 [languages]
   [languages.mn]
+    contentDir = "content/mn"
     weight = 1
     locale = "mn"
     label = "Монгол"
@@ -40,6 +41,7 @@ paginate = 9
         weight = 6
 
   [languages.en]
+    contentDir = "content/en"
     weight = 2
     locale = "en"
     label = "English"

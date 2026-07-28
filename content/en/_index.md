@@ -1,6 +1,7 @@
 ---
 title: "EPA@Lab"
 description: "Electrical Power Automation Laboratory"
+translationKey: "home"
 ---
 
 # EPA@Lab
