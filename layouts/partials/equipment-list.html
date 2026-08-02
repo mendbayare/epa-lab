@@ -1,0 +1,38 @@
+{{ $items := where site.RegularPages "Section" "equipment" }}
+{{ $categories := slice }}
+{{ range $items }}
+  {{ $categories = $categories | append (.Params.params_category | default "Other") }}
+{{ end }}
+{{ $categories = uniq $categories }}
+
+{{ $order := slice "ABB relay" "SEL relay" "Testing" "Other" }}
+
+{{ with $items }}
+  <section class="w-100 mw8 center mt5">
+    <h2 class="f3 fw6 mv4">{{ i18n "equipment" }}</h2>
+
+    {{ range $order }}
+      {{ $cat := . }}
+      {{ if in $categories $cat }}
+        <h3 class="f5 fw6 mt4 mb2">{{ $cat }}</h3>
+        <ul class="f6 lh-copy pl3 mid-gray">
+          {{ range where $items "Params.params_category" $cat }}
+            <li>{{ .Title }}{{ with .Content }} — {{ . | $.Page.RenderString }}{{ end }}</li>
+          {{ end }}
+        </ul>
+      {{ end }}
+    {{ end }}
+
+    {{ range sort $categories }}
+      {{ $cat := . }}
+      {{ if not (in $order $cat) }}
+        <h3 class="f5 fw6 mt4 mb2">{{ $cat }}</h3>
+        <ul class="f6 lh-copy pl3 mid-gray">
+          {{ range where $items "Params.params_category" $cat }}
+            <li>{{ .Title }}{{ with .Content }} — {{ . | $.Page.RenderString }}{{ end }}</li>
+          {{ end }}
+        </ul>
+      {{ end }}
+    {{ end }}
+  </section>
+{{ end }}

@@ -1,0 +1,16 @@
+{{ $areas := where site.RegularPages "Section" "research" }}
+{{ with $areas }}
+  <section class="w-100 mw8 center mt5">
+    <h2 class="f3 fw6 mv4">{{ i18n "research_areas" }}</h2>
+    <div class="flex flex-wrap">
+      {{ range sort . "Title" }}
+        <article class="w-100 w-30-l mb4 mr3-l epalab-card pa3">
+          <h3 class="f5 fw6 mt0 mb2">{{ .Title }}</h3>
+          {{ with .Params.description }}
+            <p class="f6 lh-copy mid-gray ma0">{{ . | $.Page.RenderString }}</p>
+          {{ end }}
+        </article>
+      {{ end }}
+    </div>
+  </section>
+{{ end }}

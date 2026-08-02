@@ -43,5 +43,14 @@ other = "Languages"
 [pageTitle]
 other = "Blog"
 
+[research_areas]
+other = "Research Areas"
+
+[equipment]
+other = "Equipment"
+
+[achievements]
+other = "Achievements"
+
 [taxonomyPageList]
 other = "All posts"

@@ -1,0 +1,27 @@
+{{ $photo := .Params.params_photo }}
+<article class="w-100 w-30-l mb4 epalab-card pa3">
+  <div class="tc">
+    {{ with $photo }}
+      <img src="{{ . | absURL }}" alt="{{ $.Title }}" class="w4 h4 br-100 cover ba card-photo">
+    {{ end }}
+    <h3 class="f4 fw6 mt3 mb1">{{ .Title }}</h3>
+    {{ with .Params.params_title }}
+      <p class="f6 mid-gray mt0">{{ . }}</p>
+    {{ end }}
+  </div>
+  {{ with .Params.params_achievements }}
+    <div class="mt3">
+      <p class="f6 fw6 mb1">{{ i18n "achievements" }}</p>
+      <ul class="f6 lh-copy pl3 mt0">
+        {{ range . }}
+          <li>{{ . }}</li>
+        {{ end }}
+      </ul>
+    </div>
+  {{ end }}
+  {{ with .Content }}
+    <div class="f6 lh-copy nested-links mt3">
+      {{ . }}
+    </div>
+  {{ end }}
+</article>

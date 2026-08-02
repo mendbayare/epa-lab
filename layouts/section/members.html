@@ -1,0 +1,39 @@
+{{ define "main" }}
+  <article class="pa3 pa4-ns nested-copy-line-height">
+    <section class="cf ph3 ph5-l pv3 pv4-l f4 tc-l center measure-wide lh-copy nested-links mid-gray">
+      {{ .Content }}
+    </section>
+
+    {{ $members := sort .Pages "Params.params_year" "desc" }}
+    {{ $supervisors := where $members "Params.params_supervisor" true }}
+    {{ $rest := where $members "Params.params_supervisor" "ne" true }}
+
+    {{ with $supervisors }}
+      <section class="w-100 mw8 center mt4">
+        <div class="flex flex-wrap justify-around">
+          {{ range . }}
+            {{ partial "member-card.html" . }}
+          {{ end }}
+        </div>
+      </section>
+    {{ end }}
+
+    {{ $prevYear := 0 }}
+    <section class="w-100 mw8 center mt5">
+    {{ range $rest }}
+      {{ if ne .Params.params_year $prevYear }}
+        {{ if ne $prevYear 0 }}
+          </div>
+        {{ end }}
+        <h2 class="f3 fw6 mt5 mb4">{{ .Params.params_year }}</h2>
+        <div class="flex flex-wrap justify-around">
+        {{ $prevYear = .Params.params_year }}
+      {{ end }}
+      {{ partial "member-card.html" . }}
+    {{ end }}
+    {{ if ne $prevYear 0 }}
+    </div>
+    {{ end }}
+    </section>
+  </article>
+{{ end }}
