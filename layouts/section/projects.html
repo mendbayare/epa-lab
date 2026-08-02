@@ -5,9 +5,9 @@
     </section>
     <section class="w-100 mw8 center">
       {{ range .Paginator.Pages }}
-        <article class="mb4 epalab-card pa3">
+        <article class="mb4 epalab-card epalab-card--project pa3">
           <h2 class="f4 fw6 mt0 mb1"><a href="{{ .RelPermalink }}" class="link">{{ .Title }}</a></h2>
-          <p class="f6 mid-gray mt0 mb2">{{ .Date.Format "2006-01-02" }}</p>
+          <p class="data-label mid-gray mt0 mb2">{{ .Date.Format "2006-01-02" }}</p>
           {{ with .Params.description }}
             <p class="f6 lh-copy mt0">{{ . | $.Page.RenderString }}</p>
           {{ end }}

@@ -1,10 +1,13 @@
 {{ $photo := .Params.params_photo }}
-<article id="{{ .File.ContentBaseName }}" class="w-100 w-30-l mb4 epalab-card pa3">
+{{ $modifier := cond .Params.params_supervisor "epalab-card--supervisor" "epalab-card--member" }}
+<article id="{{ .File.ContentBaseName }}" class="w-100 w-30-l mb4 epalab-card {{ $modifier }} pa3">
   <div class="tc">
     {{ with $photo }}
       <img src="{{ . | absURL }}" alt="{{ $.Title }}" class="w4 h4 br-100 cover ba card-photo">
     {{ end }}
-    <h3 class="f4 fw6 mt3 mb1">{{ .Title }}</h3>
+    <h3 class="f4 fw6 mt3 mb1">
+      {{ if $.Params.params_supervisor }}<span class="status-dot" aria-hidden="true"></span>{{ end }}{{ .Title }}
+    </h3>
     {{ with .Params.params_title }}
       <p class="f6 mid-gray mt0">{{ . }}</p>
     {{ end }}

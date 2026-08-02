@@ -56,6 +56,45 @@ a.link.dim:hover {
   border: 2px solid #d7e7f5;
 }
 
+/* Card accent system — terminal-strip differentiation */
+.epalab-card--member {
+  border-top: 3px solid var(--epa-blue);
+}
+
+.epalab-card--supervisor {
+  border-top: 3px solid var(--epa-signal);
+}
+
+.epalab-card--area {
+  border-top: 3px solid var(--epa-blue);
+}
+
+.epalab-card--project {
+  border-left: 3px solid var(--epa-blue);
+}
+
+.epalab-card--equipment {
+  background: var(--epa-mist);
+  border-top: 3px solid var(--epa-blue);
+}
+
+.status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--epa-signal);
+  margin-right: 8px;
+  vertical-align: middle;
+  box-shadow: 0 0 0 3px rgba(242, 169, 59, 0.25);
+}
+
+.epalab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
 html {
   scroll-behavior: smooth;
 }

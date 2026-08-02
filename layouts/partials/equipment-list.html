@@ -14,24 +14,34 @@
     {{ range $order }}
       {{ $cat := . }}
       {{ if in $categories $cat }}
-        <h3 class="f5 fw6 mt4 mb2">{{ $cat }}</h3>
-        <ul class="f6 lh-copy pl3 mid-gray">
+        <h3 class="font-mono f5 fw6 mt4 mb2">{{ $cat }}</h3>
+        <div class="epalab-grid">
           {{ range where $items "Params.params_category" $cat }}
-            <li>{{ .Title }}{{ with .Content }} — {{ . | $.Page.RenderString }}{{ end }}</li>
+            <article class="epalab-card epalab-card--equipment pa3">
+              <p class="font-mono f6 fw6 mt0 mb1">{{ .Title }}</p>
+              {{ with .Content }}
+                <p class="f6 lh-copy mt0 mb0">{{ . | $.Page.RenderString }}</p>
+              {{ end }}
+            </article>
           {{ end }}
-        </ul>
+        </div>
       {{ end }}
     {{ end }}
 
     {{ range sort $categories }}
       {{ $cat := . }}
       {{ if not (in $order $cat) }}
-        <h3 class="f5 fw6 mt4 mb2">{{ $cat }}</h3>
-        <ul class="f6 lh-copy pl3 mid-gray">
+        <h3 class="font-mono f5 fw6 mt4 mb2">{{ $cat }}</h3>
+        <div class="epalab-grid">
           {{ range where $items "Params.params_category" $cat }}
-            <li>{{ .Title }}{{ with .Content }} — {{ . | $.Page.RenderString }}{{ end }}</li>
+            <article class="epalab-card epalab-card--equipment pa3">
+              <p class="font-mono f6 fw6 mt0 mb1">{{ .Title }}</p>
+              {{ with .Content }}
+                <p class="f6 lh-copy mt0 mb0">{{ . | $.Page.RenderString }}</p>
+              {{ end }}
+            </article>
           {{ end }}
-        </ul>
+        </div>
       {{ end }}
     {{ end }}
   </section>
