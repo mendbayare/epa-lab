@@ -162,6 +162,8 @@ via a partial. Equipment items are in MN only (names are already English).
 
 ## Source Documents
 
+- `CONTENT-ARCHITECTURE.md` — content → UI pattern map (design-system
+  foundation; equipment grid solution in §3)
 - `epalab.pdf` — official lab intro (members, equipment, research
   areas, training, contact)
 - `Лабораторийн Вэбсайт Хөгжүүлэлт.md` — original project plan

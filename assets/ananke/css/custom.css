@@ -1,7 +1,34 @@
 :root {
-  --epa-blue: #1b6ca8;
-  --epa-blue-dark: #124f7a;
-  --epa-blue-soft: #eaf3fb;
+  --epa-navy: #0b2545;
+  --epa-blue: #1b4b82;
+  --epa-sky: #4f86c6;
+  --epa-mist: #eaf2fb;
+  --epa-ink: #45506b;
+  --epa-signal: #f2a93b;
+
+  --epa-font-heading: "IBM Plex Sans", -apple-system, "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --epa-font-body: -apple-system, "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --epa-font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+body {
+  font-family: var(--epa-font-body);
+  color: var(--epa-ink);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--epa-font-heading);
+  color: var(--epa-navy);
+}
+
+.font-mono {
+  font-family: var(--epa-font-mono);
+}
+
+.data-label {
+  font-family: var(--epa-font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
 }
 
 a.link.dim:hover,
@@ -9,8 +36,8 @@ a.link.dim:hover,
   color: var(--epa-blue);
 }
 
-h1, h2, h3, h4, h5, h6 {
-  color: var(--epa-blue-dark);
+a.link.dim:hover {
+  color: var(--epa-sky);
 }
 
 .epalab-card {
@@ -21,7 +48,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .epalab-card:hover {
-  box-shadow: 0 6px 18px rgba(27, 108, 168, 0.12);
+  box-shadow: 0 6px 18px rgba(27, 75, 130, 0.12);
   transform: translateY(-2px);
 }
 
@@ -43,9 +70,17 @@ html {
 
 @keyframes epalab-glow {
   0% {
-    box-shadow: 0 0 0 4px rgba(27, 108, 168, 0.45);
+    box-shadow: 0 0 0 4px rgba(27, 75, 130, 0.45);
   }
   100% {
-    box-shadow: 0 0 0 4px rgba(27, 108, 168, 0);
+    box-shadow: 0 0 0 4px rgba(27, 75, 130, 0);
   }
+}
+
+.bg-epa-navy {
+  background-color: var(--epa-navy);
+}
+
+.bg-epa-mist {
+  background-color: var(--epa-mist);
 }

@@ -75,6 +75,7 @@ paginate = 9
 [params]
   ananke_logo = "EPA@Lab"
   mainSections = ["news"]
+  background_color_class = "bg-epa-navy"
 
 [params.ananke]
   custom_css = ["custom.css"]
