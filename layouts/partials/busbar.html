@@ -1,0 +1,39 @@
+{{/*
+  busbar.html — single-line-diagram strip (generator → breaker → transformer → bus → load).
+  Pure SVG, palette hardcoded to the EPA tokens: navy #0b2545, mist #eaf2fb, signal #f2a93b.
+*/}}
+<svg viewBox="0 0 1080 120" class="w-100 db bg-epa-mist" role="img" aria-label="Single-line diagram" preserveAspectRatio="xMidYMid meet">
+  <g fill="none" stroke="#0b2545" stroke-width="2">
+    <line x1="40" y1="62" x2="1040" y2="62"/>
+    <line x1="40" y1="70" x2="1040" y2="70"/>
+    <line x1="40" y1="62" x2="40" y2="70"/>
+    <line x1="1040" y1="62" x2="1040" y2="70"/>
+    <line x1="150" y1="44" x2="150" y2="62"/>
+    <line x1="330" y1="44" x2="330" y2="62"/>
+    <line x1="510" y1="44" x2="510" y2="62"/>
+    <line x1="690" y1="44" x2="690" y2="62"/>
+    <line x1="870" y1="44" x2="870" y2="62"/>
+    <circle cx="150" cy="26" r="13" fill="#eaf2fb"/>
+    <line x1="502" y1="26" x2="518" y2="26"/>
+    <circle cx="502" cy="26" r="6.5" fill="#eaf2fb"/>
+    <circle cx="518" cy="26" r="6.5" fill="#eaf2fb"/>
+    <rect x="319" y="15" width="22" height="22" fill="#eaf2fb"/>
+    <line x1="319" y1="15" x2="341" y2="37"/>
+    <rect x="861" y="15" width="18" height="22" fill="#eaf2fb"/>
+    <line x1="870" y1="15" x2="870" y2="37"/>
+    <polyline points="864,31 870,40 876,31"/>
+  </g>
+  <rect x="687" y="23" width="6" height="6" fill="#0b2545"/>
+  <circle cx="150" cy="62" r="3" fill="#f2a93b"/>
+  <circle cx="330" cy="62" r="3" fill="#f2a93b"/>
+  <circle cx="510" cy="62" r="3" fill="#f2a93b"/>
+  <circle cx="690" cy="62" r="3" fill="#f2a93b"/>
+  <circle cx="870" cy="62" r="3" fill="#f2a93b"/>
+  <g fill="#0b2545" font-family="IBM Plex Mono, ui-monospace, Menlo, Consolas, monospace" font-size="11" letter-spacing="0.18em" text-anchor="middle">
+    <text x="150" y="98">GENERATOR</text>
+    <text x="330" y="98">BREAKER</text>
+    <text x="510" y="98">TRANSFORMER</text>
+    <text x="690" y="98">BUS</text>
+    <text x="870" y="98">LOAD</text>
+  </g>
+</svg>

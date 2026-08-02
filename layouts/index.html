@@ -1,0 +1,31 @@
+{{ define "main" }}
+  <header class="bg-epa-navy">
+    <div class="mw8 center ph3 ph4-ns pv5 tc">
+      <p class="data-label moon-gray mt0 mb3">{{ .Description }}</p>
+      <h1 class="white f2 f1-ns fw6 ma0">{{ .Title }}</h1>
+      <p class="white-60 font-mono f6 mt3 mb0">{{ site.Title }}</p>
+    </div>
+    {{ partial "busbar.html" . }}
+  </header>
+
+  <article class="ph3 ph5-l pv4 f4 center measure-wide lh-copy nested-links mid-gray">
+    {{ .Content }}
+  </article>
+
+  {{ $news := sort (collections.Where site.RegularPages "Section" "in" site.Params.mainSections) "Date" "desc" }}
+  {{ $news = collections.First 3 $news }}
+  {{ with $news }}
+    <section class="w-100 mw8 center pb5">
+      <h2 class="f3 fw6 mb4">{{ i18n "recent_posts" }}</h2>
+      {{ range . }}
+        <article class="mb4 epalab-card epalab-card--member pa3">
+          <h3 class="f4 fw6 mt0 mb1"><a href="{{ .RelPermalink }}" class="link">{{ .Title }}</a></h3>
+          <p class="data-label mid-gray mt0 mb2">{{ .Date.Format "2006-01-02" }}</p>
+          <p class="f6 lh-copy mt0">{{ .Summary }}</p>
+          <a href="{{ .RelPermalink }}" class="link f6 fw6">{{ i18n "readMore" }}</a>
+        </article>
+      {{ end }}
+      <a href="{{ (site.GetPage "news").RelPermalink }}" class="link f6 fw6">{{ i18n "all_posts" }}</a>
+    </section>
+  {{ end }}
+{{ end }}
