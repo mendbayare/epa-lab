@@ -8,12 +8,15 @@ Power and Electrical Engineering (ЭХИС).
 
 ## Tech Stack
 
-- **Static Site Generator:** Hugo
-- **Theme:** [Ananke](https://github.com/theNewDynamic/gohugo-theme-ananke) (minimal starter theme — easy to customize, extend, and add custom content types)
+- **Static Site Generator:** Hugo (v0.164.0+extended)
+- **Theme:** [Ananke](https://github.com/theNewDynamic/gohugo-theme-ananke) (minimal starter theme — easy to customize, extend, and add custom content types; git submodule at `themes/ananke`)
 - **CMS:** Decap CMS (form-based, Git-backed)
-- **Hosting:** GitHub Pages or Netlify ($0/month)
+- **Hosting:** Netlify (free tier, auto-deploys from GitHub `main` on push)
 - **Domain:** `*.must.edu.mn` subdomain (decided at project end; use
   free domain in the meantime)
+- **Live site:** https://boisterous-buttercream-880ab6.netlify.app/ (Netlify
+  auto-generated name; changeable)
+- **Deploy config:** `netlify.toml` (build command `hugo --minify`, publish dir `public`)
 
 Decision rationale: No ongoing maintenance; fast & secure; sufficient
 for a lab site.
@@ -30,9 +33,15 @@ for a lab site.
 - Mongolian is the default language; English as fallback for
   interface strings
 - UI strings in `i18n/mn.toml` and `i18n/en.toml`
-- Content translated via Hugo's standard filename convention
-  (`page.mn.md`, `page.en.md`)
-- Untranslated content falls back to the other language
+- **Content lives in explicit language directories**:
+  - `content/mn/` → Mongolian (`contentDir = "content/mn"`)
+  - `content/en/` → English (`contentDir = "content/en"`)
+  - URLs: `/about/` (MN), `/en/about/` (EN)
+- Section `_index.md` files need matching `translationKey` in both
+  languages so Hugo matches them as translations (otherwise the
+  language switcher won't appear on section pages)
+- Language switcher shows the language code (`en`/`mn`) in nav;
+  heading uses i18n key `translations` ("Хэл"/"Languages")
 
 Rationale: Hugo's i18n is first-class — no plugins needed,
 per-language menus, per-language URLs (`/en/about/`, `/mn/about/`).
@@ -51,19 +60,22 @@ per-language menus, per-language URLs (`/en/about/`, `/mn/about/`).
 
 ## Content Model
 
+Front matter uses `params_` prefix so Hugo stores fields under `.Params.*`
+(e.g. `params_year` → `.Params.year`). Body text is markdown.
+
 ### Member
 
 ```yaml
-name        : string
-title       : string (e.g. "ЦСА 4-р курсын оюутан")
-photo       : image
-year        : integer (e.g. 2026 for "I үе", 2027 for "II үе")
-achievements: string[] (optional — structured as array of strings,
+title       : string (name)
+params_title: string (e.g. "ЦСА 4-р курсын оюутан")
+params_photo: image
+params_year : integer (e.g. 2025 for "I үе", 2026 for "II үе")
+params_achievements: string[] (optional — structured as array of strings,
               each renders as a bullet point; section hides if empty)
-social      : optional links
+body        : markdown (optional)
 ```
 
-Group members by `year` in descending order.
+Group members by `params_year` in descending order.
 
 ### News / Post
 
@@ -86,12 +98,14 @@ Renders inside About Us page via a partial.
 ### Equipment Item
 
 ```yaml
-name        : string
-category    : string (e.g. "ABB relay", "SEL relay", "Testing")
-description : text (optional)
+title       : string (e.g. "RED670")
+params_category: string (e.g. "ABB relay", "SEL relay", "Testing", "Other")
+body        : text (optional description)
 ```
 
-Renders inside About Us page via a partial.
+Equipment is **not** in Decap CMS — data lives in `content/mn/equipment/`
+markdown files, edited directly in GitHub. Renders inside About Us page
+via a partial. Equipment items are in MN only (names are already English).
 
 ## Design Decisions
 
@@ -110,6 +124,17 @@ Renders inside About Us page via a partial.
   areas, training, contact)
 - `Лабораторийн Вэбсайт Хөгжүүлэлт.md` — original project plan
 
+## Decap CMS
+
+- Config: `static/admin/config.yml`, entry point `static/admin/index.html`
+- Backend: `git-gateway` (Netlify Identity — email/password, no OAuth proxy needed)
+- Admin URL: `/admin/`
+- Collections grouped by type, MN + EN side by side:
+  - News (MN + EN), Members (MN + EN), Research (MN + EN)
+  - Equipment is NOT in the CMS (static data in GitHub)
+- MN collections write to `content/mn/<section>/`, EN collections to
+  `content/en/<section>/`
+
 ## Staff Training Note
 
 ~1 hour admin training session needed. Decap CMS is form-based, not
@@ -121,18 +146,18 @@ WYSIWYG drag-drop like WordPress. Staff should be comfortable with:
 
 ## Epics (Future Work)
 
-### Epic 1: Project Scaffold
-- [ ] Initialize Hugo site with Ananke theme
-- [ ] Configure for Decap CMS
-- [ ] Set up GitHub repo + GitHub Pages
-- [ ] Deploy bare site
+### Epic 1: Project Scaffold ✅
+- [x] Initialize Hugo site with Ananke theme
+- [x] Configure for Decap CMS
+- [x] Set up GitHub repo + Netlify hosting
+- [x] Deploy bare site
 
 ### Epic 2: Content Implementation
-- [ ] Homepage hero + highlights
-- [ ] About Us (intro + equipment + research areas)
-- [ ] Members page (grouped by year, with photo + achievements)
+- [x] Homepage shows only news posts (`mainSections = ["news"]`)
+- [ ] About Us (intro + equipment + research areas) — needs partials
+- [ ] Members page (grouped by year, with photo + achievements) — needs list template
 - [ ] Research / Projects page
-- [ ] News section
+- [ ] News section listing
 - [ ] Contact page
 
 ### Epic 3: Mock & Iterate
@@ -140,15 +165,16 @@ WYSIWYG drag-drop like WordPress. Staff should be comfortable with:
 - [ ] Show to lab leadership
 - [ ] Iterate based on feedback
 
-### Epic 4: Content Population
-- [ ] Add all members from `epalab.pdf`
-- [ ] Add equipment list
-- [ ] Add research areas
-- [ ] Add initial news posts (training sessions, activities)
-- [ ] Lab supervisor profile
+### Epic 4: Content Population ✅ (from `epalab.pdf`)
+- [x] Add all members from `epalab.pdf` (14 members, MN)
+- [x] Add equipment list (19 items, MN)
+- [x] Add research areas (6 areas, MN)
+- [x] Add initial news posts (4 training activities, MN)
+- [x] Lab supervisor profile (Б.Түвшинбаяр)
+- [ ] English content still needs population
 
 ### Epic 5: Domain & Launch
 - [ ] Set up `labname.must.edu.mn`
-- [ ] Point DNS to GitHub Pages / Netlify
+- [ ] Point DNS to Netlify
 - [ ] Final QA
 - [ ] Launch
