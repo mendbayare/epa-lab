@@ -1,0 +1,18 @@
+{{ define "main" }}
+  <article class="pa3 pa4-ns nested-copy-line-height">
+    <section class="cf ph3 ph5-l pv3 pv4-l f4 tc-l center measure-wide lh-copy nested-links mid-gray">
+      {{ .Content }}
+    </section>
+    <section class="w-100 mw8 center">
+      {{ range .Paginator.Pages }}
+        <article class="mb4 epalab-card pa3">
+          <h2 class="f4 fw6 mt0 mb1"><a href="{{ .RelPermalink }}" class="link">{{ .Title }}</a></h2>
+          <p class="f6 mid-gray mt0 mb2">{{ .Date.Format "2006-01-02" }}</p>
+          <p class="f6 lh-copy mt0">{{ .Summary }}</p>
+          <a href="{{ .RelPermalink }}" class="link f6 fw6">{{ i18n "readMore" }}</a>
+        </article>
+      {{ end }}
+      {{ partial "pagination.html" . }}
+    </section>
+  </article>
+{{ end }}

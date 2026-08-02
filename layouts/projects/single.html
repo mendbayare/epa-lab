@@ -1,0 +1,21 @@
+{{ define "main" }}
+  <article class="pa3 pa4-ns nested-copy-line-height">
+    <div class="w-100 mw8 center">
+      <h1 class="f2 fw6 mt0 mb1">{{ .Title }}</h1>
+      <p class="f6 mid-gray mt0 mb2">{{ .Date.Format "2006-01-02" }}</p>
+      {{ partial "project-members.html" . }}
+      {{ with .Params.description }}
+        <p class="f4 lh-copy">{{ . | $.Page.RenderString }}</p>
+      {{ end }}
+      <div class="f5 lh-copy nested-links">
+        {{ .Content }}
+      </div>
+      {{ with .Params.params_pdf }}
+        <div class="mt4">
+          <a href="{{ . | absURL }}" class="link f6 fw6" download>{{ i18n "download_pdf" }}</a>
+          <iframe src="{{ . | absURL }}" class="w-100 mt2" style="height:80vh;border:1px solid #e2e8f0;border-radius:8px" loading="lazy"></iframe>
+        </div>
+      {{ end }}
+    </div>
+  </article>
+{{ end }}

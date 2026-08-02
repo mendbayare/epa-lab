@@ -3,8 +3,8 @@ backend:
   repo: mendbayare/epa-lab
   branch: main
 
-media_folder: static/images
-public_folder: /images
+media_folder: static/uploads
+public_folder: /uploads
 
 collections:
   - name: posts
@@ -56,7 +56,7 @@ collections:
       - { label: "Body", name: "body", widget: "markdown", required: false }
 
   - name: research
-    label: "Судалгаа / Research"
+    label: "Судалгааны чиглэл / Research Areas"
     folder: content/mn/research
     create: true
     slug: "{{slug}}"
@@ -72,4 +72,30 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Description", name: "description", widget: "markdown" }
+
+  - name: projects
+    label: "Төсөл / Projects"
+    folder: content/mn/projects
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Гарчиг / Title", name: "title", widget: "string" }
+      - { label: "Огноо / Date", name: "date", widget: "datetime" }
+      - { label: "Тайлбар / Description", name: "description", widget: "markdown" }
+      - { label: "Хамтран ажилласан гишүүд / Members", name: "params_members", widget: "list", field: { label: "Гишүүд / Member", name: "member", widget: "relation", collection: "members", search_fields: ["title"], value_field: "slug", display_fields: ["title"] } }
+      - { label: "PDF тайлан / PDF report", name: "params_pdf", widget: "file" }
+      - { label: "Агуулга / Body", name: "body", widget: "markdown", required: false }
+
+  - name: projects_en
+    label: "Projects (English)"
+    folder: content/en/projects
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Description", name: "description", widget: "markdown" }
+      - { label: "Members", name: "params_members", widget: "list", field: { label: "Member", name: "member", widget: "relation", collection: "members_en", search_fields: ["title"], value_field: "slug", display_fields: ["title"] } }
+      - { label: "PDF report", name: "params_pdf", widget: "file" }
+      - { label: "Body", name: "body", widget: "markdown", required: false }
 

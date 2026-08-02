@@ -52,5 +52,17 @@ other = "Equipment"
 [achievements]
 other = "Achievements"
 
+[projects]
+other = "Projects"
+
+[associated_members]
+other = "Team members"
+
+[view_report]
+other = "View report"
+
+[download_pdf]
+other = "Download PDF"
+
 [taxonomyPageList]
 other = "All posts"

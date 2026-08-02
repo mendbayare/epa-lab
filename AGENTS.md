@@ -54,14 +54,19 @@ per-language menus, per-language URLs (`/en/about/`, `/mn/about/`).
 2. **About Us** — lab intro, goals, supervisor info, equipment list,
    research areas
 3. **Members** — grouped by year/cohort; achievements added later
-4. **Research / Projects** — 6 research areas + student projects
+4. **Research / Projects** — student projects with PDF reports
+   (`/projects/`); research areas live on About Us
 5. **News** — publications, training sessions, activities
 6. **Contact** — address (VIII building, room 601), phone, map
 
 ## Content Model
 
-Front matter uses `params_` prefix so Hugo stores fields under `.Params.*`
-(e.g. `params_year` → `.Params.year`). Body text is markdown.
+Front matter uses a `params_` prefix to avoid colliding with Hugo's reserved
+keys (e.g. `title`, `date`). Hugo stores these **literally** under
+`.Params.*` — i.e. `params_title` → `.Params.params_title`,
+`params_year` → `.Params.params_year`. Do **not** read them as
+`.Params.title`/`.Params.year` (the un-prefixed names collide with reserved
+keys and return the page title/nothing). Body text is markdown.
 
 ### Member
 
@@ -70,12 +75,14 @@ title       : string (name)
 params_title: string (e.g. "ЦСА 4-р курсын оюутан")
 params_photo: image
 params_year : integer (e.g. 2025 for "I үе", 2026 for "II үе")
+params_supervisor: bool (optional — pins the member in a highlighted card at top)
 params_achievements: string[] (optional — structured as array of strings,
               each renders as a bullet point; section hides if empty)
 body        : markdown (optional)
 ```
 
-Group members by `params_year` in descending order.
+Group members by `params_year` in descending order. The lab supervisor
+(`params_supervisor: true`) is pinned above the year groups.
 
 ### News / Post
 
@@ -93,7 +100,27 @@ title       : string
 description : markdown
 ```
 
-Renders inside About Us page via a partial.
+Renders inside About Us page via a partial. Data lives in
+`content/mn/research/`; this section has **no nav link** (it is a data
+source only — the Research nav page is the Projects section below).
+
+### Project (report)
+
+```yaml
+title         : string
+date          : date
+description   : markdown (summary shown on the listing)
+params_members: string[] (member slugs, e.g. "demberelzodov"; each is
+              resolved to its member page via `site.GetPage` and rendered
+              as a link; missing pages are skipped gracefully)
+params_pdf    : file (PDF report path, e.g. "uploads/report.pdf")
+body          : markdown (optional)
+```
+
+Renders as the **Research / Projects** nav page (`/projects/`, `/en/projects/`).
+Listing is news-style (date, title, description, linked members), paginated.
+The single page embeds the PDF in a native browser viewer (`<iframe>`) plus a
+download link.
 
 ### Equipment Item
 
@@ -111,12 +138,16 @@ via a partial. Equipment items are in MN only (names are already English).
 
 - Group members by year of membership (e.g. "member of 2026"), NOT by
   Захиргаа/position and NOT by generational label (I үе / II үе)
+- The lab supervisor (`params_supervisor: true`) is pinned in a highlighted
+  card above the year groups
 - Members page shows: name, title, photo, year, brief detail
 - Achievements are an **array of strings** — empty = section hidden
 - Equipment list lives inside **About Us**, not a separate page
-- Research areas also live inside **About Us**
+- Research areas also live inside **About Us** (not on the Research page)
 - Training & activities go into **News**
+- Research / Projects page is a **projects** listing with embedded PDF reports
 - Branding/color finalized during mock phase
+- Equipment list is rendered as a card grid (pending styling)
 
 ## Source Documents
 
@@ -130,8 +161,12 @@ via a partial. Equipment items are in MN only (names are already English).
 - Backend: `git-gateway` (Netlify Identity — email/password, no OAuth proxy needed)
 - Admin URL: `/admin/`
 - Collections grouped by type, MN + EN side by side:
-  - News (MN + EN), Members (MN + EN), Research (MN + EN)
+  - News (MN + EN), Members (MN + EN), Research Areas (MN + EN),
+    Projects (MN + EN)
   - Equipment is NOT in the CMS (static data in GitHub)
+- Media uploads (PDFs, images) go to `static/uploads/`, served at `/uploads/`
+- The Projects collections use a `file` widget for the PDF report and a
+  `relation` widget (→ Members collection) for associated members
 - MN collections write to `content/mn/<section>/`, EN collections to
   `content/en/<section>/`
 
@@ -152,13 +187,13 @@ WYSIWYG drag-drop like WordPress. Staff should be comfortable with:
 - [x] Set up GitHub repo + Netlify hosting
 - [x] Deploy bare site
 
-### Epic 2: Content Implementation
+### Epic 2: Content Implementation ✅
 - [x] Homepage shows only news posts (`mainSections = ["news"]`)
-- [ ] About Us (intro + equipment + research areas) — needs partials
-- [ ] Members page (grouped by year, with photo + achievements) — needs list template
-- [ ] Research / Projects page
-- [ ] News section listing
-- [ ] Contact page
+- [x] About Us (intro + equipment + research areas) — custom section template + partials
+- [x] Members page (supervisor pinned + grouped by year, photo + achievements) — custom section template + card partial
+- [x] Research / Projects page (news-style listing + native PDF viewer on single pages)
+- [x] News section listing (date, title, summary)
+- [x] Contact page (address + Google Maps embed)
 
 ### Epic 3: Mock & Iterate
 - [ ] Create mock design (blue/white)
@@ -167,7 +202,7 @@ WYSIWYG drag-drop like WordPress. Staff should be comfortable with:
 
 ### Epic 4: Content Population ✅ (from `epalab.pdf`)
 - [x] Add all members from `epalab.pdf` (14 members, MN)
-- [x] Add equipment list (19 items, MN)
+- [x] Add equipment list (20 items, MN)
 - [x] Add research areas (6 areas, MN)
 - [x] Add initial news posts (4 training activities, MN)
 - [x] Lab supervisor profile (Б.Түвшинбаяр)

@@ -1,0 +1,12 @@
+{{ $slugs := .Params.params_members }}
+{{ with $slugs }}
+  <p class="f6 mid-gray">
+    {{ i18n "associated_members" }}:
+    {{ range $idx, $slug := . }}
+      {{ if gt $idx 0 }}, {{ end }}
+      {{ with site.GetPage (printf "/members/%s" $slug) }}
+        <a href="{{ .RelPermalink }}" class="link">{{ .Title }}</a>
+      {{ end }}
+    {{ end }}
+  </p>
+{{ end }}

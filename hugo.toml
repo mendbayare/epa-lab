@@ -29,7 +29,7 @@ paginate = 9
         weight = 3
       [[languages.mn.menu.main]]
         name = "Судалгаа"
-        url = "/research/"
+        url = "/projects/"
         weight = 4
       [[languages.mn.menu.main]]
         name = "Мэдээ"
@@ -61,7 +61,7 @@ paginate = 9
         weight = 3
       [[languages.en.menu.main]]
         name = "Research"
-        url = "/en/research/"
+        url = "/en/projects/"
         weight = 4
       [[languages.en.menu.main]]
         name = "News"

@@ -52,5 +52,17 @@ other = "Тоног төхөөрөмж"
 [achievements]
 other = "Амжилт"
 
+[projects]
+other = "Төслүүд"
+
+[associated_members]
+other = "Хамтран ажилласан гишүүд"
+
+[view_report]
+other = "Тайланг үзэх"
+
+[download_pdf]
+other = "PDF татах"
+
 [taxonomyPageList]
 other = "Бүх мэдээ"
