@@ -1,12 +1,14 @@
-{{ $slugs := .Params.params_members }}
-{{ with $slugs }}
+{{ $membersSection := site.GetPage "/members" }}
+{{ $resolved := slice }}
+{{ range .Params.params_members }}
+  {{ $slug := . }}
+  {{ with site.GetPage (printf "/members/%s" $slug) }}
+    {{ $resolved = $resolved | append (dict "name" .Title "href" (printf "%s#%s" $membersSection.RelPermalink $slug)) }}
+  {{ end }}
+{{ end }}
+{{ with $resolved }}
   <p class="f6 mid-gray">
     {{ i18n "associated_members" }}:
-    {{ range $idx, $slug := . }}
-      {{ if gt $idx 0 }}, {{ end }}
-      {{ with site.GetPage (printf "/members/%s" $slug) }}
-        <a href="{{ .RelPermalink }}" class="link">{{ .Title }}</a>
-      {{ end }}
-    {{ end }}
+    {{ range $idx, $m := . }}{{ if gt $idx 0 }}, {{ end }}<a href="{{ $m.href }}" class="link">{{ $m.name }}</a>{{ end }}
   </p>
 {{ end }}

@@ -77,4 +77,4 @@ paginate = 9
   mainSections = ["news"]
 
 [params.ananke]
-  custom_css = ["css/custom.css"]
+  custom_css = ["custom.css"]

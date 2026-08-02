@@ -28,3 +28,24 @@ h1, h2, h3, h4, h5, h6 {
 .epalab-card .card-photo {
   border: 2px solid #d7e7f5;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+.epalab-card {
+  scroll-margin-top: 6rem;
+}
+
+.epalab-card:target {
+  animation: epalab-glow 1.6s ease-out;
+}
+
+@keyframes epalab-glow {
+  0% {
+    box-shadow: 0 0 0 4px rgba(27, 108, 168, 0.45);
+  }
+  100% {
+    box-shadow: 0 0 0 4px rgba(27, 108, 168, 0);
+  }
+}

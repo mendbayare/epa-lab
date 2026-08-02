@@ -1,5 +1,5 @@
 {{ $photo := .Params.params_photo }}
-<article class="w-100 w-30-l mb4 epalab-card pa3">
+<article id="{{ .File.ContentBaseName }}" class="w-100 w-30-l mb4 epalab-card pa3">
   <div class="tc">
     {{ with $photo }}
       <img src="{{ . | absURL }}" alt="{{ $.Title }}" class="w4 h4 br-100 cover ba card-photo">

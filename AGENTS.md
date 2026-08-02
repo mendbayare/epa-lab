@@ -26,6 +26,10 @@ for a lab site.
 - **Primary:** Blue + White (lab's own choice, not MUST brand)
 - **Status:** Mock phase — start with placeholder theme; finalize
   later.
+- **Custom CSS:** `assets/ananke/css/custom.css`, registered via
+  `site.Params.ananke.custom_css = ["custom.css"]` in `hugo.toml`. The
+  theme looks up entries under `assets/ananke/css/` (it concatenates them
+  into the main CSS bundle — a path like `css/custom.css` would 404).
 
 ## i18n / Multilingual
 
@@ -79,10 +83,17 @@ params_supervisor: bool (optional — pins the member in a highlighted card at t
 params_achievements: string[] (optional — structured as array of strings,
               each renders as a bullet point; section hides if empty)
 body        : markdown (optional)
+build:
+  render: "never"   # member files do NOT get their own detail page
 ```
 
 Group members by `params_year` in descending order. The lab supervisor
 (`params_supervisor: true`) is pinned above the year groups.
+
+Member cards are anchor targets (`id` = file slug). Links to members
+(e.g. on a project's "Team members") point at `/members/#<slug>` — the
+card on the Members page — not to a per-member page. A `:target` CSS glow
+highlights the card on arrival (flash-and-fade, in `custom.css`).
 
 ### News / Post
 
